@@ -20,7 +20,7 @@
 
     <div class="container-fluid p-3">
 
-        @livewire('hello-world', ['myName' => 'Batman'])
+        @livewire('register')
         
 
     </div>
