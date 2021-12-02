@@ -16,10 +16,12 @@ use App\Http\Livewire\{
 |
 */
 
-// Route::get('/', function () {
-//     return view('home/index');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//Route::get('/register', App\Http\Livewire\Auth\Register::class);
+Route::get('tweets', ShowTweets::class)->middleware('auth');
 
-Route::get('tweets', ShowTweets::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

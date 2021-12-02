@@ -6,17 +6,22 @@
 @endsection
 
 <div>
-    
+
     <div class="card mb-3">
         <h5 class="card-header">Teste</h5>
         <div class="card-body">
             <h5 class="card-title">Subtítulo</h5>
-            <p class="card-text">{{ $message }}</p>
-            <div class="form-group">
-                <label for="message">Vamos mudar o valor da menssagem</label>
-                <textarea class="form-control" id="message" rows="3" wire:model="message"></textarea>
-            </div>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <p class="card-text">{{ $content }}</p>
+
+            <p> @error('content') {{ $message }} @enderror </p>
+
+            <form method="post" wire:submit.prevent="store">
+                <div class="form-group">
+                    <label for="content">Vamos mudar o valor da menssagem</label>
+                    <input type="text" class="form-control" id="content" wire:model="content">
+                </div>
+                <button type="submit" class="btn btn-primary">Criar Tweet</button>
+            </form>
         </div>
     </div>
 
@@ -29,6 +34,7 @@
                     <tr>
                         <th>Usuário</th>
                         <th>Tweet</th>
+                        <th>Ação</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +43,13 @@
                     <tr>
                         <td>{{ $tweet->user->name }}</td>
                         <td>{{ $tweet->content }}</td>
+                        @if ($tweet->likes->count())
+                        <td> <a class="btn btn-danger" href="#" role="button"
+                                wire:click.prevent="unlike({{ $tweet->id }})">Descurtir</a> </td>
+                        @else
+                        <td> <a class="btn btn-success" href="#" role="button"
+                                wire:click.prevent="like({{ $tweet->id }})">Curtir</a> </td>
+                        @endif
                     </tr>
                     @endforeach
 
@@ -45,6 +58,7 @@
                     <tr>
                         <th>Usuário</th>
                         <th>Tweet</th>
+                        <th>Ação</th>
                     </tr>
                 </tfoot>
             </table>
