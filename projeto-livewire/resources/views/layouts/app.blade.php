@@ -20,8 +20,7 @@
 
     <div class="container-fluid p-3">
 
-        @livewire('register')
-        
+        {{ $slot }}      
 
     </div>
 

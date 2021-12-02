@@ -17,6 +17,4 @@ Route::get('/', function () {
     return view('home/index');
 });
 
-Route::get('/register', function () {
-    return view('register');
-});
+Route::get('/register', App\Http\Livewire\Auth\Register::class);
