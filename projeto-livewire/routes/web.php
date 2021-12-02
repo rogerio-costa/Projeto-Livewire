@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\{
+    ShowTweets
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home/index');
-});
+// Route::get('/', function () {
+//     return view('home/index');
+// });
 
-Route::get('/register', App\Http\Livewire\Auth\Register::class);
+//Route::get('/register', App\Http\Livewire\Auth\Register::class);
+
+Route::get('tweets', ShowTweets::class);
