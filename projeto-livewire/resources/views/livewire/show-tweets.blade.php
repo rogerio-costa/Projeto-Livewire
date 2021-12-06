@@ -5,7 +5,7 @@
 
 @endsection
 
-<div>
+<div class="p-3">
 
     <div class="card mb-3">
         <h5 class="card-header">Teste</h5>
@@ -28,10 +28,12 @@
     <div class="card mb-3">
         <h5 class="card-header">Show Tweets</h5>
         <div class="card-body">
+            <livewire:datatable model="App\User" exclude="" />
 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>Foto de Perfil</th>
                         <th>Usuário</th>
                         <th>Tweet</th>
                         <th>Ação</th>
@@ -41,6 +43,14 @@
 
                     @foreach ($tweets as $tweet)
                     <tr>
+                        <td>
+                            @if ($tweet->user->getPhotoAttribute())
+                            <img src="{{ url("storage/{$tweet->user->getPhotoAttribute()}") }}" class="rounded-full h-8
+                            w-8">
+                            @else
+                            Sem foto
+                            @endif
+                        </td>
                         <td>{{ $tweet->user->name }}</td>
                         <td>{{ $tweet->content }}</td>
                         @if ($tweet->likes->count())
@@ -56,6 +66,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>Foto de Perfil</th>
                         <th>Usuário</th>
                         <th>Tweet</th>
                         <th>Ação</th>
